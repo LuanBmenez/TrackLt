@@ -81,7 +81,6 @@ export const APIProvider = ({ children }) => {
     localStorage.removeItem("token");
   };
 
-  // Criar hábito
   const createHabit = async (name, days) => {
     setLoading(true);
     try {
@@ -150,18 +149,17 @@ export const APIProvider = ({ children }) => {
   const toggleHabit = async (habitId, currentStatus) => {
     try {
       if (currentStatus) {
-        // Se está marcado, desmarcar
         await axios.post(`${API_BASE}/habits/${habitId}/uncheck`, {}, {
           headers: getHeaders()
         });
       } else {
-        // Se não está marcado, marcar
+       
         await axios.post(`${API_BASE}/habits/${habitId}/check`, {}, {
           headers: getHeaders()
         });
       }
       
-      // Atualizar lista de hábitos de hoje
+
       fetchTodaysHabits();
       return { success: true };
     } catch (error) {
@@ -181,7 +179,7 @@ export const APIProvider = ({ children }) => {
     }
   };
 
-  // Carregar dados iniciais quando há token
+ 
   useEffect(() => {
     const loadInitialData = async () => {
       if (!token) return;
@@ -189,11 +187,11 @@ export const APIProvider = ({ children }) => {
       const headers = { Authorization: `Bearer ${token}` };
       
       try {
-        // Buscar hábitos
+       
         const habitsResponse = await axios.get(`${API_BASE}/habits`, { headers });
         setHabits(habitsResponse.data);
 
-        // Buscar hábitos de hoje
+       
         const todayResponse = await axios.get(`${API_BASE}/habits/today`, { headers });
         setTodaysHabits(todayResponse.data);
       } catch (error) {
@@ -213,26 +211,19 @@ export const APIProvider = ({ children }) => {
 
  
   const value = {
-    // Estados
+    
     user,
     habits,
     todaysHabits,
     loading,
-    
-    // Funções de autenticação
     login,
     register,
     logout,
-    
-    // Funções de hábitos
     createHabit,
     deleteHabit,
-    
-    // Funções de hoje
     fetchTodaysHabits,
     toggleHabit,
     
-    // Utilitários
     isAuthenticated: !!token
   };
 
