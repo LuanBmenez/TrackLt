@@ -23,7 +23,7 @@ const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/habits" element={<Habits />} /> 
-            <Route path="/today" element={<Today />} />
+            <Route path="/today" element={<Today />} /> 
           </Routes>
         </AppContainer>
       </BrowserRouter>

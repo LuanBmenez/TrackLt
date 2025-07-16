@@ -32,12 +32,14 @@ const UserImage = styled.img`
 
 const Header = () => {
   const { user } = useAPI();
-  
+  console.log("User in Header:", user);  
   return (
     <HeaderContainer>
       <Logo>TrackIt</Logo>
-      {user?.image && (
+      {user?.image ? (
         <UserImage src={user.image} alt="User Profile" />
+      ):(
+        <UserImage src={'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg'} alt="User Profile" />
       )}
     </HeaderContainer>
   );

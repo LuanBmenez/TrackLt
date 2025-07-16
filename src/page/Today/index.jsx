@@ -5,7 +5,7 @@ import Header from "../../Components/Header";
 import PageContainer from "../../Components/PageContainer";
 import PageTitle from "../../Components/PageTitle";
 import { useAPI } from "../../context/APIContext";
-import {EmptyMessage, HabitTodayCard, CheckButton} from "./style";
+import {EmptyMessage, HabitTodayCard, CheckButton, TodayHabitsContainer} from "./style";
 
 
 const Today = () => {

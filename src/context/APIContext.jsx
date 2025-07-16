@@ -3,6 +3,7 @@ import axios from "axios";
 
 const APIContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAPI = () => {
   const context = useContext(APIContext);
   
