@@ -22,11 +22,24 @@ const HabitName = styled.h3`
   margin: 0 0 8px 0;
 `;
 
-const HabitDays = styled.p`
+const DaysContainer = styled.div`
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+`;
+
+const DayBox = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #D4EDDA;
+  background-color: ${props => props.$selected ? '#CFCFCF' : '#FFFFFF'};
+  color: ${props => props.$selected ? '#FFFFFF' : '#CFCFCF'};
   font-family: 'Lexend Deca', sans-serif;
-  font-size: 13px;
-  color: #666666;
-  margin: 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DeleteButton = styled.button`
@@ -42,20 +55,35 @@ const DeleteButton = styled.button`
 `;
 
 const HabitCard = ({ habit, onDelete }) => {
-  const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  const daysOfWeek = [
+    { letter: 'D', value: 0 }, 
+    { letter: 'S', value: 1 },  
+    { letter: 'T', value: 2 },  
+    { letter: 'Q', value: 3 }, 
+    { letter: 'Q', value: 4 },  
+    { letter: 'S', value: 5 }, 
+    { letter: 'S', value: 6 }   
+  ];
   
-  const getDaysText = (days) => {
-    if (!days || days.length === 0) return '';
+  const renderDays = () => {
     
-    const dayNames = days.map(day => daysOfWeek[day]).join(', ');
-    return dayNames;
+    return daysOfWeek.map((day) => {
+     
+      const isSelected = habit.days && habit.days.includes(day.value);
+      
+      return (
+        <DayBox key={day.value} $selected={isSelected}>
+          {day.letter}
+        </DayBox>
+      );
+    });
   };
 
   return (
     <CardContainer>
       <HabitInfo>
         <HabitName>{habit.name}</HabitName>
-        <HabitDays>{getDaysText(habit.days)}</HabitDays>
+        <DaysContainer>{renderDays()}</DaysContainer>
       </HabitInfo>
       <DeleteButton onClick={() => onDelete(habit.id)}>
         🗑️

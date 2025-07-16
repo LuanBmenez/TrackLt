@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAPI } from "../context/APIContext";
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -29,11 +30,15 @@ const UserImage = styled.img`
   object-fit: cover;
 `;
 
-const Header = ({ userImage }) => {
+const Header = () => {
+  const { user } = useAPI();
+  
   return (
     <HeaderContainer>
       <Logo>TrackIt</Logo>
-      <UserImage src={userImage} alt="User Profile" />
+      {user?.image && (
+        <UserImage src={user.image} alt="User Profile" />
+      )}
     </HeaderContainer>
   );
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays,faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const FooterContainer = styled.footer`
   width: 100%;
@@ -16,8 +16,8 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterButton = styled.button`
-  flex: 1;  /* Ocupa todo o espaço disponível */
-  height: 100%;  /* Ocupa toda a altura do footer */
+  flex: 1;
+  height: 100%;
   border: none;
   font-family: 'Lexend Deca', sans-serif;
   font-size: 18px;
@@ -38,28 +38,29 @@ const FooterButton = styled.button`
   }
 `;
 
-
 const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <FooterContainer>
       <FooterButton 
-        $active={location.pathname === '/habit'} 
-        onClick={() => navigate('/habit')}
+        $active={location.pathname === '/habits'} 
+        onClick={() => handleNavigation('/habits')}
       >
         <FontAwesomeIcon icon={faCalendarDays} /> Hábitos
       </FooterButton>
       
       <FooterButton 
         $active={location.pathname === '/today'} 
-        onClick={() => navigate('/today')}
+        onClick={() => handleNavigation('/today')}
       >
         <FontAwesomeIcon icon={faCalendarCheck} />Hoje
       </FooterButton>
-      
-
     </FooterContainer>
   );
 };

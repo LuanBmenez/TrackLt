@@ -7,11 +7,23 @@ const PageTitleContainer = styled.div`
   padding: 28px 17px 20px 17px;
 `;
 
+const TitleColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Title = styled.h2`
   font-family: 'Lexend Deca', sans-serif;
   font-size: 23px;
   color: #126BA5;
   margin: 0;
+`;
+
+const Subtitle = styled.p`
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 18px;
+  color: ${props => props.color || '#BABABA'};
+  margin: 7px 0 0 0;
 `;
 
 const AddButton = styled.button`
@@ -32,10 +44,13 @@ const AddButton = styled.button`
   }
 `;
 
-const PageTitle = ({ title, onAddClick, showAddButton = false }) => {
+const PageTitle = ({ title, subtitle, subtitleColor, onAddClick, showAddButton = false }) => {
   return (
     <PageTitleContainer>
-      <Title>{title}</Title>
+      <TitleColumn>
+        <Title>{title}</Title>
+        {subtitle && <Subtitle color={subtitleColor}>{subtitle}</Subtitle>}
+      </TitleColumn>
       {showAddButton && (
         <AddButton onClick={onAddClick}>
           +
