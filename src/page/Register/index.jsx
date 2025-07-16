@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import { RegisterContainer, Form, SignUpLink } from "./style";
 import Logo from "../../Components/Logo";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import { useAPI } from "../../context/APIContext";
-
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -17,9 +17,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const result = await register(email, password, name, URL);
-    
+
     if (result.success) {
       alert("Cadastro realizado com sucesso!");
       navigate("/");
@@ -59,8 +59,29 @@ const Register = () => {
           onChange={(e) => setUrl(e.target.value)}
           disabled={loading}
         />
-        <Button type="submit" disabled={loading || !email || !password || !name || !URL}>
-          {loading ? "Registrando..." : "Registrar"}
+        <Button
+          type="submit"
+          disabled={loading || !email || !password || !name || !URL}
+        >
+          {loading ? (
+            <ThreeDots
+              height="20"
+              width="40"
+              radius="9"
+              color="#FFFFFF"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            "Registrar"
+          )}
         </Button>
       </Form>
       <SignUpLink to="/">Ja tem conta? Faça Login!</SignUpLink>

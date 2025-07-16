@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 import PageContainer from "../../Components/PageContainer";
 import PageTitle from "../../Components/PageTitle";
 import { useAPI } from "../../context/APIContext";
-import {EmptyMessage, HabitTodayCard, CheckButton, TodayHabitsContainer} from "./style";
+import {EmptyMessage, HabitTodayCard, CheckButton, TodayHabitsContainer, LoginMessage} from "./style";
+
+dayjs.locale('pt-br');
 
 
 const Today = () => {
@@ -35,23 +39,15 @@ const Today = () => {
   }
 
   const getCurrentDate = () => {
-    const today = new Date();
+    const today = dayjs();
     
-    const daysOfWeek = [
-      'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 
-      'Quinta-feira', 'Sexta-feira', 'Sábado'
-    ];
+    // Capitalizar primeira letra do dia da semana
+    const dayOfWeek = today.format('dddd');
+    const capitalizedDay = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
     
-    const months = [
-      '01', '02', '03', '04', '05', '06',
-      '07', '08', '09', '10', '11', '12'
-    ];
+    const formattedDate = today.format('DD/MM');
     
-    const dayOfWeek = daysOfWeek[today.getDay()];
-    const day = today.getDate().toString().padStart(2, '0');
-    const month = months[today.getMonth()];
-    
-    return `${dayOfWeek}, ${day}/${month}`;
+    return `${capitalizedDay}, ${formattedDate}`;
   };
 
   const getSubtitle = () => {
